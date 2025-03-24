@@ -52,7 +52,7 @@ activities = {
         "max_participants": 30,
         "participants": []
         },
-        # Atividades Culturais
+    # Atividades Culturais
     "Teatro": {
         "description": "Aulas de teatro",
         "schedule": "Terças e Quintas, 14:00 - 16:00",
@@ -105,7 +105,4 @@ def signup_for_activity(activity_name: str, email: str):
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
 
-    #Validate activity exists
-    if activity_name not in activities:
-        raise HTTPException(status_code=404, detail="Activity not found")
 
