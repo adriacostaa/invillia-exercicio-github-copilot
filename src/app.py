@@ -20,7 +20,7 @@ app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
           "static")), name="static")
 
 # In-memory activity database
-activities = {
+activities = { 
     "Chess Club": {
         "description": "Learn strategies and compete in chess tournaments",
         "schedule": "Fridays, 3:30 PM - 5:00 PM",
@@ -38,7 +38,46 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
-    }
+    },
+    # Atividades Esportivas
+    "Futebol": {
+        "description": "Treinos de futebol",
+        "schedule": "Segundas e Quartas, 15:00 - 17:00",
+        "max_participants": 30,
+        "participants": []
+        },
+    "Volei": {
+        "description": "Treinos de volei",
+        "schedule": "Terças e Quintas, 15:00 - 17:00",
+        "max_participants": 30,
+        "participants": []
+        },
+        # Atividades Culturais
+    "Teatro": {
+        "description": "Aulas de teatro",
+        "schedule": "Terças e Quintas, 14:00 - 16:00",
+        "max_participants": 20,
+        "participants": []
+        },
+    "Dança": {
+        "description": "Aulas de dança",
+        "schedule": "Segundas e Quartas, 14:00 - 16:00",
+        "max_participants": 20,
+        "participants": []
+    },
+    # Atividades Intelectuais
+    "Debate": {
+        "description": "Aulas de debate",
+        "schedule": "Quartas, 14:00 - 16:00",
+        "max_participants": 20,
+        "participants": []
+        },
+    "Clube do Livro": {
+        "description": "Clube do livro",
+        "schedule": "Sextas, 14:00 - 16:00",
+        "max_participants": 20,
+        "participants": []  
+        }
 }
 
 
@@ -65,3 +104,8 @@ def signup_for_activity(activity_name: str, email: str):
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
+
+    #Validate activity exists
+    if activity_name not in activities:
+        raise HTTPException(status_code=404, detail="Activity not found")
+
